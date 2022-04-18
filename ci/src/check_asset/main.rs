@@ -1,4 +1,3 @@
-
 use serde_derive::Deserialize;
 use serde_derive::Serialize;
 use serde_json::Value;
@@ -10,6 +9,11 @@ const UA: &str = "niuhuan jasmine ci";
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    let gh_token = std::env::var("GH_TOKEN")?;
+    if gh_token.is_empty() {
+        panic!("Please set GH_TOKEN");
+    }
+
     let target = std::env::var("TARGET")?;
 
     let vs_code_txt = tokio::fs::read_to_string("version.code.txt").await?;
@@ -27,7 +31,8 @@ async fn main() -> Result<()> {
         un => panic!("unknown target : {}", un),
     };
 
-    let client = reqwest::ClientBuilder::new().user_agent(UA).build()?;
+    let client = reqwest::ClientBuilder::new().user_agent(UA)
+        .header("Authorization", format!("token {}", gh_token)).build()?;
 
     let check_response = client.get(format!("https://api.github.com/repos/{}/{}/releases/tags/{}", OWNER, REPO, code))
         .send().await?;

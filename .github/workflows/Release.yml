@@ -267,5 +267,5 @@ jobs:
         if: steps.check_asset.outputs.skip_build != 'true'
         run: |
           cd ci
-          go run ./cmd/upload_asset
+          cargo run --bin upload-asset
 
