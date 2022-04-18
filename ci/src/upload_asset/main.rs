@@ -29,13 +29,13 @@ async fn main() -> Result<()> {
     };
 
     let local_path = match target.as_str() {
-        "macos" => "build/macos.dmg",
-        "ios" => "build/nosign.ipa",
-        "windows" => "build/windows.zip",
-        "linux" => "build/linux.zip",
-        "android-arm32" => "build/app/outputs/flutter-apk/app-release.apk",
-        "android-arm64" => "build/app/outputs/flutter-apk/app-release.apk",
-        "android-x86_64" => "build/app/outputs/flutter-apk/app-release.apk",
+        "macos" => "../build/macos.dmg",
+        "ios" => "../build/nosign.ipa",
+        "windows" => "../build/windows.zip",
+        "linux" => "../build/linux.zip",
+        "android-arm32" => "../build/app/outputs/flutter-apk/app-release.apk",
+        "android-arm64" => "../build/app/outputs/flutter-apk/app-release.apk",
+        "android-x86_64" => "../build/app/outputs/flutter-apk/app-release.apk",
         un => panic!("unknown target : {}", un),
     };
 
